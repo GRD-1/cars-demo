@@ -1,0 +1,14 @@
+{
+  "verbose": true,
+  "transform": {
+    "^.+\\.ts?$": "ts-jest"
+  },
+
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testRegex": ".*.test.ts$",
+  "coverageDirectory": "./_src/test/coverage",
+  "testPathIgnorePatterns": ["./_src/test/stubbbb"],
+  "testEnvironment": "node",
+  "clearMocks": true
+}

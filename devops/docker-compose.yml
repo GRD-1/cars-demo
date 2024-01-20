@@ -1,0 +1,56 @@
+version: '2'
+
+services:
+  node:
+    image: 'test-project-cars-nodeimg-${NODE_ENV}'
+    container_name: 'test-project-cars-node-${NODE_ENV}'
+    build:
+      context: ..
+      dockerfile: 'devops/Dockerfile-${NODE_ENV}'
+    restart: on-failure
+    environment:
+      - 'MONGO_HOSTNAME=test-project-cars-mongodb'
+      - 'MONGO_PORT=${MONGO_PORT}'
+      - 'MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}'
+      - 'MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}'
+      - 'MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}'
+    ports:
+      - '${NODE_PORT_EXTERNAL}:${NODE_PORT_INTERNAL}'
+      - '${NODE_DEBUG_PORT_EXTERNAL}:${NODE_DEBUG_PORT_INTERNAL}'
+    volumes:
+      - ../src:/projectFiles/src
+      - ../test:/projectFiles/test
+      - ../env:/projectFiles/env
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    container_name: "test-project-cars-mongodb-${NODE_ENV}"
+    restart: on-failure
+    environment:
+      - 'MONGO_HOSTNAME=test-project-cars-mongodb'
+      - 'MONGO_PORT=${MONGO_INTERNAL_PORT}'
+      - 'MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}'
+      - 'MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}'
+      - 'MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}'
+    ports:
+      - '${MONGO_PORT_EXTERNAL}:${MONGO_PORT_INTERNAL}'
+    volumes:
+      - "../db/data:/data/db"
+
+  mongodb-backup:
+    image: tiredofit/mongodb-backup
+    container_name: "test-project-cars-mongo-backup-${NODE_ENV}"
+    restart: on-failure
+    environment:
+      - 'DB_HOST=test-project-cars-mongodb'
+      - 'DB_DUMP_FREQ=1440'
+      - 'DB_DUMP_BEGIN=0000'
+      - 'DB_CLEANUP_TIME=8640'
+      - 'MD5=TRUE'
+      - 'COMPRESSION=XZ'
+    volumes:
+      - "../db/backups:/backups"
+    links:
+      - mongodb
