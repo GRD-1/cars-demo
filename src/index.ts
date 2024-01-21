@@ -1,3 +1,6 @@
 import { app } from './app';
 
-app.listen(3000, () => console.log('The server started on port 3000 ...'));
+const PORT = process.env.NODE_PORT_INTERNAL || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
