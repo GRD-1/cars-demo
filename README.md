@@ -78,7 +78,7 @@ $ docker logs test-project-cars-node-debug -f --tail 30
 
 * после запуска сервера через докер запустить cli клиент:
 ```bash
-$ docker exec -it task_queues-node-test npm run client-cli --env-file ./devops/env/.env.prod up -d
+$ docker exec -it test-project-cars-node-test npm run client-cli --env-file ./devops/env/.env.prod up -d
 ```
 
 ## Переменные окружения
@@ -89,17 +89,17 @@ $ docker exec -it task_queues-node-test npm run client-cli --env-file ./devops/e
 
 ```bash
 # unit tests
-$ docker exec -it task_queues-node-test npm run test:unit
+$ docker exec -it test-project-cars-node-test npm run test:unit
 ```
 
 ```bash
 # integration tests
-$ docker exec -it task_queues-node-test npm run test:int
+$ docker exec -it test-project-cars-node-test npm run test:int
 ```
 
 ```bash
 # test coverage
-$ docker exec -it task_queues-node-test npm run test:cov
+$ docker exec -it test-project-cars-node-test npm run test:cov
 ```
 
 ## Примечание

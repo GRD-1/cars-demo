@@ -10,7 +10,7 @@ services:
     restart: on-failure
     environment:
       - 'MONGO_HOSTNAME=test-project-cars-mongodb'
-      - 'MONGO_PORT=${MONGO_PORT}'
+      - 'MONGO_PORT=${MONGO_PORT_INTERNAL}'
       - 'MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}'
       - 'MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}'
       - 'MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}'

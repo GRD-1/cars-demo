@@ -13,13 +13,10 @@ npm-debug.log*
 # IDEs and editors
 /.idea
 
-# database
-/db
-
 #
 package-lock.json
-env
-documentation
+/db/data
+#env
 
 # temp dev files
 TODO.txt

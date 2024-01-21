@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "module": "app/index.js",
-  "type": "module",
   "keywords": [
     "REST",
     "TypeScript",
@@ -12,19 +11,24 @@
     "cli"
   ],
   "author": "GRD",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
-    "start:prod": "npm run build && NODE_ENV=prod node app/index.js",
-    "start:dev": "NODE_ENV=dev tsc-watch --onSuccess 'nodemon --config devops/nodemon-dev.json _src/index.ts'",
-    "start:debug": "NODE_ENV=debug tsc-watch --onSuccess 'nodemon --config devops/nodemon-debug.json _src/index.ts'",
+    "start:prod": "npm run build && NODE_ENV=prod node dist/index.js",
+    "start:dev": "concurrently \"npx tsc --watch\" \"nodemon --config devops/nodemon-dev.json src/index.ts\"",
+    "start:debug": "NODE_ENV=debug tsc-watch --onSuccess 'nodemon --config devops/nodemon-debug.json src/index.ts'",
     "run-typescript": "ts-node-transpile-only",
-    "build": "tsc && node app/utils/fix-imports.util.js",
-    "test:unit": "jest --config _src/test/unit/jest.unit-config.json",
-    "test:int": "jest --config _src/test/integration/jest.integration-config.json",
+    "build": "tsc",
+    "test:unit": "jest --config src/test/unit/jest.unit-config.json",
+    "test:int": "jest --config src/test/integration/jest.integration-config.json",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage --config jest.config.json",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.0",
     "express": "^4.18.2"
   },
   "devDependencies": {
@@ -34,6 +38,7 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
+    "concurrently": "^8.2.2",
     "eslint": "7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-import-resolver-typescript": "^3.5.4",
