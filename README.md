@@ -16,6 +16,7 @@
 1. [Стек](#Стек)
 2. [Запуск](#Запуск)
 3. [Использование](#Использование)
+4. [Переменные окружения](#Переменные)
 4. [Тесты](#Тесты)
 5. [Примечание](#Примечание)
 
@@ -44,25 +45,11 @@
 <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker</a>
 и запустите соответствующую команду в терминале (или нажмите на кнопку play на полях).
 
-* для запуска в product mode:
-
-```bash
-$ docker stop $(docker ps -aq)
-$ docker-compose -f devops/docker-compose.yml --env-file env/prod.env --env-file env/node.env --env-file env/mongodb.env up -d
-```
-
-* для запуска в test mode:
-
-```bash
-$ docker stop $(docker ps -aq)
-$ docker-compose -f devops/docker-compose.yml --env-file env/test.env --env-file env/node.env --env-file env/mongodb.env up -d
-```
-
 * для запуска в development mode:
 
 ```bash
 $ docker stop $(docker ps -aq)
-$ docker-compose -f devops/docker-compose.yml --env-file env/dev.env --env-file env/node.env --env-file env/mongodb.env up -d
+$ docker-compose -f devops/docker-compose.yml --env-file env/dev.env up -d
 $ docker logs test-project-cars-node-dev -f --tail 30
 ```
 
@@ -70,8 +57,22 @@ $ docker logs test-project-cars-node-dev -f --tail 30
 
 ```bash
 $ docker stop $(docker ps -aq)
-$ docker-compose -f devops/docker-compose.yml --env-file env/debug.env --env-file env/node.env --env-file env/mongodb.env up -d
+$ docker-compose -f devops/docker-compose.yml --env-file env/debug.env up -d
 $ docker logs test-project-cars-node-debug -f --tail 30
+```
+
+* для запуска в product mode:
+
+```bash
+$ docker stop $(docker ps -aq)
+$ docker-compose -f devops/docker-compose.yml --env-file env/prod.env up -d
+```
+
+* для запуска в qa mode:
+
+```bash
+$ docker stop $(docker ps -aq)
+$ docker-compose -f devops/docker-compose.yml --env-file env/qa.env up -d
 ```
 
 ## Использование
@@ -81,9 +82,11 @@ $ docker logs test-project-cars-node-debug -f --tail 30
 $ docker exec -it test-project-cars-node-test npm run client-cli --env-file ./devops/env/.env.prod up -d
 ```
 
-## Переменные окружения
+## Переменные
 
-Переменные окружения тут: ./env.
+Переменные окружения тут: ./env. Подключены через npm dotenv + dotenvx.
+* для product mode dotenvx подключен в скрипте package.json "start:prod"
+* для dev и debug mode dotenvx подключен в конфиге nodemon (./devops/nodemon-dev.json)
 
 ## Тесты
 

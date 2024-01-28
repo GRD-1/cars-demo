@@ -6,5 +6,5 @@
   "ignore": [
     "src/test"
   ],
-  "exec": "node --require ts-node/register --require tsconfig-paths/register src/index.ts"
+  "exec": "dotenvx run --env-file=./env/dev.env -- node --require ts-node/register --require tsconfig-paths/register src/index.ts"
 }

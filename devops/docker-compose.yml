@@ -21,6 +21,8 @@ services:
       - ../src:/projectFiles/src
       - ../test:/projectFiles/test
       - ../env:/projectFiles/env
+      - ../devops/nodemon-dev.json:/projectFiles/devops/nodemon-dev.json
+      - ../devops/nodemon-debug.json:/projectFiles/devops/nodemon-debug.json
     depends_on:
       - mongodb
 

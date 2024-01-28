@@ -1,9 +1,10 @@
 import express from 'express';
-import 'dotenv/config';
 import bodyParser from 'body-parser';
 import mainRoute from './routes/main.route';
 import { errorHandler } from './middleware/error-handler';
 import { BAD_REQUEST } from './constants/err.constant';
+
+console.log(`\nproject name: ${process.env.COMPOSE_PROJECT_NAME}\n`);
 
 export const app = express();
 app.use(express.urlencoded({ extended: false }));
