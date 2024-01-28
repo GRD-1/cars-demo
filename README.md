@@ -1,8 +1,9 @@
 # cars-demo
-приложение для хранения и управления базой данных автомобилей различных брендов.
-проект состоит из двух частей: 
-* сервера, реализующего REST API
-* cli клиента для запросов к API
+This is an application for storing and managing a car database.
+It consists of two parts:
+* a server that implements the REST API
+* a CLI client that allows you to make queries to this database
+* 
 
 <br>
 <p style="display: block; width: 100%; text-align:left;">
@@ -13,14 +14,19 @@
 </p>
 
 ## Contents
-1. [Стек](#Стек)
-2. [Запуск](#Запуск)
-3. [Использование](#Использование)
-4. [Переменные окружения](#Переменные)
-5. [Тесты](#Тесты)
-6. [Примечание](#Примечание)
 
-## Стек
+1. [Stack](#Stack)
+2. [Launch](#launch)
+3. [Usage](#usage)
+4. [Environment](#environment)
+5. [Settings](#settings)
+6. [Tests](#tests)
+7. [Database](#tests)
+8. [Logs](#tests)
+9. [CI/CD](#cicd)
+10. [Documentation](#documentation)
+
+## Stack
 
 <div>
     <div>
@@ -39,13 +45,13 @@
 </div>
 <br>
 
-## Запуск
+## Launch
 
-Чтобы запустить проект, установите 
-<a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker</a>
-и запустите соответствующую команду в терминале (или нажмите на кнопку play на полях).
+The project is prepared to launch via the docker.You need to install <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker</a>
 
-* для запуска в development mode:
+and then run the corresponding command in the terminal.
+
+* for development mode use:
 
 ```bash
 $ docker stop $(docker ps -aq)
@@ -53,7 +59,7 @@ $ docker-compose -f devops/docker-compose.yml --env-file env/dev.env up -d
 $ docker logs cars-demo-node-dev -f --tail 30
 ```
 
-* для запуска в debug mode:
+* for debug mode use:
 
 ```bash
 $ docker stop $(docker ps -aq)
@@ -61,34 +67,35 @@ $ docker-compose -f devops/docker-compose.yml --env-file env/debug.env up -d
 $ docker logs cars-demo-node-debug -f --tail 30
 ```
 
-* для запуска в product mode:
+* for product mode use:
 
 ```bash
 $ docker stop $(docker ps -aq)
 $ docker-compose -f devops/docker-compose.yml --env-file env/prod.env up -d
 ```
 
-* для запуска в qa mode:
+* for qa mode use:
 
 ```bash
 $ docker stop $(docker ps -aq)
 $ docker-compose -f devops/docker-compose.yml --env-file env/qa.env up -d
 ```
 
-## Использование
+## Usage
 
-* после запуска сервера через докер запустить cli клиент:
+* after starting the server, use this command to launch CLI client:
 ```bash
 $ docker exec -it cars-demo-node-test npm run client-cli --env-file ./devops/env/.env.prod up -d
 ```
 
-## Переменные
+## Environment
 
-Переменные окружения тут: ./env. Подключены через npm dotenv + dotenvx.
-* для product mode dotenvx подключен в скрипте package.json "start:prod"
-* для dev и debug mode dotenvx подключен в конфиге nodemon (./devops/nodemon-dev.json)
+Environment variables are here: ./env. They are connected to the project using npm dotenv + dotenvx.
+* for product mode the dotenvx is connected inside the package.json script "start: prod"
+* for the dev and debug mode the dotenvx are connected inside the nodemon configuration file (./devops/nodemon-dev.json)
+* environment variables are checked when the application is launched. If the variables are invalid, the application throws an error.
 
-## Тесты
+## Tests
 
 ```bash
 # unit tests
@@ -105,5 +112,5 @@ $ docker exec -it cars-demo-node-test npm run test:int
 $ docker exec -it cars-demo-node-test npm run test:cov
 ```
 
-## Примечание
-Я намеренно не исключил переменные окружения и бекап базы из репозитория для удобства тестирования 
+## Comments
+I intentionally left the environment variable files and the database backup copy in the project to simplify the testing. 

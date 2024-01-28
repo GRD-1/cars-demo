@@ -1,10 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import * as process from 'process';
 import mainRoute from './routes/main.route';
 import { errorHandler } from './middleware/error-handler';
 import { BAD_REQUEST } from './constants/err.constant';
+import 'reflect-metadata';
+import { validateEnvVariables } from './env/env-validator';
 
-console.log(`\nproject name: ${process.env.COMPOSE_PROJECT_NAME}\n`);
+validateEnvVariables(process.env);
 
 export const app = express();
 app.use(express.urlencoded({ extended: false }));
