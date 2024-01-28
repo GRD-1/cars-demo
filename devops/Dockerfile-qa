@@ -1,4 +1,4 @@
-FROM node:18.16.0 as test-project-cars-test
+FROM node:18.16.0 as cars-demo-test
 
 WORKDIR /projectFiles
 

@@ -1,4 +1,4 @@
-# test-project-cars
+# cars-demo
 приложение для хранения и управления базой данных автомобилей различных брендов.
 проект состоит из двух частей: 
 * сервера, реализующего REST API
@@ -17,8 +17,8 @@
 2. [Запуск](#Запуск)
 3. [Использование](#Использование)
 4. [Переменные окружения](#Переменные)
-4. [Тесты](#Тесты)
-5. [Примечание](#Примечание)
+5. [Тесты](#Тесты)
+6. [Примечание](#Примечание)
 
 ## Стек
 
@@ -50,7 +50,7 @@
 ```bash
 $ docker stop $(docker ps -aq)
 $ docker-compose -f devops/docker-compose.yml --env-file env/dev.env up -d
-$ docker logs test-project-cars-node-dev -f --tail 30
+$ docker logs cars-demo-node-dev -f --tail 30
 ```
 
 * для запуска в debug mode:
@@ -58,7 +58,7 @@ $ docker logs test-project-cars-node-dev -f --tail 30
 ```bash
 $ docker stop $(docker ps -aq)
 $ docker-compose -f devops/docker-compose.yml --env-file env/debug.env up -d
-$ docker logs test-project-cars-node-debug -f --tail 30
+$ docker logs cars-demo-node-debug -f --tail 30
 ```
 
 * для запуска в product mode:
@@ -79,7 +79,7 @@ $ docker-compose -f devops/docker-compose.yml --env-file env/qa.env up -d
 
 * после запуска сервера через докер запустить cli клиент:
 ```bash
-$ docker exec -it test-project-cars-node-test npm run client-cli --env-file ./devops/env/.env.prod up -d
+$ docker exec -it cars-demo-node-test npm run client-cli --env-file ./devops/env/.env.prod up -d
 ```
 
 ## Переменные
@@ -92,17 +92,17 @@ $ docker exec -it test-project-cars-node-test npm run client-cli --env-file ./de
 
 ```bash
 # unit tests
-$ docker exec -it test-project-cars-node-test npm run test:unit
+$ docker exec -it cars-demo-node-test npm run test:unit
 ```
 
 ```bash
 # integration tests
-$ docker exec -it test-project-cars-node-test npm run test:int
+$ docker exec -it cars-demo-node-test npm run test:int
 ```
 
 ```bash
 # test coverage
-$ docker exec -it test-project-cars-node-test npm run test:cov
+$ docker exec -it cars-demo-node-test npm run test:cov
 ```
 
 ## Примечание
