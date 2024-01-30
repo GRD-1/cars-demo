@@ -2,7 +2,7 @@ import express from 'express';
 import { AuthController } from '../auth/auth.controller';
 import { CheckCredentialsMiddleware } from '../middleware/check-credentials.middleware';
 import { AuthRequestInterface } from '../auth/types/auth-request.type';
-import { BAD_REQUEST } from '../constants/err.constant';
+import { NOT_FOUND } from '../constants/err.constant';
 
 const router = express.Router();
 const controller = new AuthController();
@@ -31,7 +31,7 @@ router.post('/login', credentialsAreValid, (req: AuthRequestInterface, res, next
 });
 
 router.use((req, res) => {
-  res.status(400).send(BAD_REQUEST);
+  res.status(404).send(NOT_FOUND);
 });
 
 export default router;

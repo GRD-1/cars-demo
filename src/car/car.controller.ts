@@ -1,17 +1,25 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import serviceProvider from '../utils/service-provider.util';
 import { CarService } from './car.service';
 const carService = serviceProvider.getService(CarService);
 
 export class CarController {
   async create(req: Request, res: Response): Promise<void> {
-    const newCar = await carService.create();
-    res.send(newCar);
+    try {
+      const newCar = await carService.create();
+      res.send(newCar);
+    } catch (e) {
+      // next(e);
+    }
   }
 
-  async getById(req: Request, res: Response): Promise<void> {
-    const car = await carService.getById();
-    res.send(car);
+  async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const car = await carService.getById();
+      res.send(car);
+    } catch (e) {
+      next(e);
+    }
   }
 
   async getSelection(req: Request, res: Response): Promise<void> {

@@ -4,6 +4,7 @@ export class CarService {
   }
 
   async getById(): Promise<string> {
+    throw new Error('Ravoly!!!');
     return 'old CarEntity';
   }
 

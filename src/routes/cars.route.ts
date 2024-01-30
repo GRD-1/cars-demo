@@ -1,7 +1,7 @@
 import express from 'express';
 import { CarController } from '../car/car.controller';
 import { CheckTokenMiddleware } from '../middleware/check-token.middleware';
-import { BAD_REQUEST } from '../constants/err.constant';
+import { NOT_FOUND } from '../constants/err.constant';
 
 const router = express.Router();
 const controller = new CarController();
@@ -34,7 +34,7 @@ router.get('/', tokenIsValid, (req, res, next) => {
  */
 router.get('/:id', tokenIsValid, (req, res, next) => {
   try {
-    controller.getById(req, res);
+    controller.getById(req, res, next);
   } catch (err) {
     next(err);
   }
@@ -63,7 +63,7 @@ router.delete('/:id', tokenIsValid, (req, res, next) => {
 });
 
 router.use((req, res) => {
-  res.status(400).send(BAD_REQUEST);
+  res.status(404).send(NOT_FOUND);
 });
 
 export default router;
