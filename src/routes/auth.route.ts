@@ -13,7 +13,7 @@ const credentialsAreValid = new CheckCredentialsMiddleware().credentialsAreValid
  */
 router.post('/register', credentialsAreValid, (req: AuthRequestInterface, res, next) => {
   try {
-    controller.register(req, res);
+    controller.register(req, res, next);
   } catch (err) {
     next(err);
   }
@@ -24,7 +24,7 @@ router.post('/register', credentialsAreValid, (req: AuthRequestInterface, res, n
  */
 router.post('/login', credentialsAreValid, (req: AuthRequestInterface, res, next) => {
   try {
-    controller.login(req, res);
+    controller.login(req, res, next);
   } catch (err) {
     next(err);
   }

@@ -11,55 +11,35 @@ const tokenIsValid = new CheckTokenMiddleware().tokenIsValid;
  * @api {post} api/cars
  */
 router.post('/', tokenIsValid, (req, res, next) => {
-  try {
-    controller.create(req, res);
-  } catch (err) {
-    next(err);
-  }
+  controller.create(req, res, next);
 });
 
 /**
  * @api {get} api/cars
  */
 router.get('/', tokenIsValid, (req, res, next) => {
-  try {
-    controller.getSelection(req, res);
-  } catch (err) {
-    next(err);
-  }
+  controller.getSelection(req, res, next);
 });
 
 /**
  * @api {get} api/cars/:id
  */
 router.get('/:id', tokenIsValid, (req, res, next) => {
-  try {
-    controller.getById(req, res, next);
-  } catch (err) {
-    next(err);
-  }
+  controller.getById(req, res, next);
 });
 
 /**
  * @api {put} api/cars/:id
  */
 router.put('/:id', tokenIsValid, (req, res, next) => {
-  try {
-    controller.update(req, res);
-  } catch (err) {
-    next(err);
-  }
+  controller.update(req, res, next);
 });
 
 /**
  * @api {delete} api/cars/:id
  */
 router.delete('/:id', tokenIsValid, (req, res, next) => {
-  try {
-    controller.delete(req, res);
-  } catch (err) {
-    next(err);
-  }
+  controller.delete(req, res, next);
 });
 
 router.use((req, res) => {

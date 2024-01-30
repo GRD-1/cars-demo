@@ -1,3 +1,5 @@
+import { CustomError } from '../errors/custom-error.type';
+
 export class CarService {
   async create(): Promise<string> {
     return 'new CarEntity';
@@ -13,6 +15,7 @@ export class CarService {
   }
 
   async update(): Promise<string> {
+    throw new CustomError(411, 'Telapia!!!');
     return 'updated CarEntity';
   }
 

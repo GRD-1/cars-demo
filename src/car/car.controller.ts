@@ -4,36 +4,50 @@ import { CarService } from './car.service';
 const carService = serviceProvider.getService(CarService);
 
 export class CarController {
-  async create(req: Request, res: Response): Promise<void> {
+  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const newCar = await carService.create();
       res.send(newCar);
-    } catch (e) {
-      // next(e);
-    }
-  }
-
-  async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
-    try {
-      const car = await carService.getById();
-      res.send(car);
     } catch (e) {
       next(e);
     }
   }
 
-  async getSelection(req: Request, res: Response): Promise<void> {
-    const carSelection = await carService.getSelection();
-    res.send(carSelection);
+  async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
+    console.log('controller');
+    try {
+      const car = await carService.getById();
+      res.send(car);
+    } catch (e) {
+      console.log('controller catch');
+      next(e);
+    }
   }
 
-  async update(req: Request, res: Response): Promise<void> {
-    const updatedCar = await carService.update();
-    res.send(updatedCar);
+  async getSelection(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const carSelection = await carService.getSelection();
+      res.send(carSelection);
+    } catch (e) {
+      next(e);
+    }
   }
 
-  async delete(req: Request, res: Response): Promise<void> {
-    const carDeleted = await carService.delete();
-    res.send(carDeleted);
+  async update(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const updatedCar = await carService.update();
+      res.send(updatedCar);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const carDeleted = await carService.delete();
+      res.send(carDeleted);
+    } catch (e) {
+      next(e);
+    }
   }
 }

@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import * as process from 'process';
 import mainRoute from './routes/main.route';
-import { errorHandler } from './middleware/error-handler';
+import { errorHandler } from './errors/error-handler';
 import { BAD_REQUEST } from './constants/err.constant';
 import 'reflect-metadata';
 import { validateEnvVariables } from './env/env-validator';

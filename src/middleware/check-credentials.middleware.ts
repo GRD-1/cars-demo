@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
 import { validate } from 'class-validator';
-import { CustomError } from '../types/custom-error.type';
+import { CustomError } from '../errors/custom-error.type';
 import { AuthDto } from '../auth/dto/auth.dto';
 import { AuthRequestInterface } from '../auth/types/auth-request.type';
 import { UNPROCESSABLE_ENTITY } from '../constants/err.constant';
