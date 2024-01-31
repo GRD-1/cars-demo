@@ -14,12 +14,10 @@ export class CarController {
   }
 
   async getById(req: Request, res: Response, next: NextFunction): Promise<void> {
-    console.log('controller');
     try {
       const car = await carService.getById();
       res.send(car);
     } catch (e) {
-      console.log('controller catch');
       next(e);
     }
   }

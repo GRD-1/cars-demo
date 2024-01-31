@@ -1,28 +1,26 @@
-import { DataSource } from 'typeorm';
+import * as mongoose from 'mongoose';
+import * as process from 'process';
+import { CustomError } from '../errors/custom-error.type';
+import { UNABLE_CONNECT_DB } from '../constants/err.constant';
 
-const myDataSource = new DataSource({
-  type: 'mongodb',
-  host: 'localhost',
-  port: 27017,
-  database: 'test',
-});
+const host = process.env.MONGO_HOSTNAME;
+const port = process.env.MONGO_PORT_INTERNAL;
+const db = process.env.MONGO_INITDB_DATABASE;
+const user = process.env.MONGO_INITDB_ROOT_USERNAME;
+const password = process.env.MONGO_INITDB_ROOT_PASSWORD;
+const connectionString = `mongodb://${user}:${password}@${host}:${port}/${db}`;
 
 class MongoConnector {
   async connect (): Promise<void> {
     try {
-      const connectionString = `mongodb://${process.env.MONGO_HOSTNAME_INTERNAL}:${process.env.MONGO_PORT_EXTERNAL}/${process.env.MONGO_INITDB_DATABASE}`;
-      console.log('\nconnectionString', connectionString);
-      // await mongoose.connect(connectionString, {});
-      console.log('Connected to MongoDB');
+      await mongoose.connect(connectionString, {});
     } catch (error) {
-      console.error('Error connecting to MongoDB:', error);
-      throw error;
+      throw new CustomError(503, UNABLE_CONNECT_DB);
     }
   }
 
-  async close (): Promise<void> {
-    // await mongoose.connection.close();
-    console.log('MongoDB connection closed');
+  async closeConnection (): Promise<void> {
+    await mongoose.connection.close();
   }
 }
 export default new MongoConnector();

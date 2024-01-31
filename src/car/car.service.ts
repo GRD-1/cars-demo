@@ -7,6 +7,8 @@ export class CarService {
 
   async getById(): Promise<string> {
     await connector.connect();
+    // ... logic
+    await connector.closeConnection();
     return 'old CarEntity';
   }
 
