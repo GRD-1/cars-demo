@@ -11,8 +11,9 @@ export class ServiceProvider {
   }
 
   getService<T>(ClassConstructor: new (...args: unknown[]) => T, ...args: unknown[]): T {
-    const serviceInstance = ServiceProvider._services[ClassConstructor.name];
-    return (serviceInstance || new ClassConstructor(...args)) as T;
+    const serviceInstance = ServiceProvider._services[ClassConstructor.name] || new ClassConstructor(...args);
+    ServiceProvider._services[ClassConstructor.name] = serviceInstance;
+    return serviceInstance as T;
   }
 }
 export default ServiceProvider.getInstance();

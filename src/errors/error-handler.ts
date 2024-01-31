@@ -8,4 +8,5 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
   } else {
     res.status(500).json({ error: INTERNAL_SERVER_ERROR });
   }
+  console.log('errorHandler', err);
 };

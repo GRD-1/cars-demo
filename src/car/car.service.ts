@@ -1,4 +1,4 @@
-import { CustomError } from '../errors/custom-error.type';
+import connector from '../utils/mongo-connector.util';
 
 export class CarService {
   async create(): Promise<string> {
@@ -6,7 +6,7 @@ export class CarService {
   }
 
   async getById(): Promise<string> {
-    throw new Error('Ravoly!!!');
+    await connector.connect();
     return 'old CarEntity';
   }
 
@@ -15,7 +15,6 @@ export class CarService {
   }
 
   async update(): Promise<string> {
-    throw new CustomError(411, 'Telapia!!!');
     return 'updated CarEntity';
   }
 
