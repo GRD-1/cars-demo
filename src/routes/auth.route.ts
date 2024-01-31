@@ -1,12 +1,12 @@
 import express from 'express';
 import { AuthController } from '../auth/auth.controller';
-import { CheckCredentialsMiddleware } from '../middleware/check-credentials.middleware';
+import { ValidateCredentialsMiddleware } from '../middleware/validate-credentials.middleware';
 import { AuthRequestInterface } from '../auth/types/auth-request.type';
 import { NOT_FOUND } from '../constants/err.constant';
 
 const router = express.Router();
 const controller = new AuthController();
-const credentialsAreValid = new CheckCredentialsMiddleware().credentialsAreValid;
+const credentialsAreValid = new ValidateCredentialsMiddleware().credentialsAreValid;
 
 /**
  * @api {post} api/auth/register

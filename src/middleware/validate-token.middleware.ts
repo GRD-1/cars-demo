@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, request } from 'express';
 
-export class CheckTokenMiddleware {
+export class ValidateTokenMiddleware {
   async tokenIsValid(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       //...do something

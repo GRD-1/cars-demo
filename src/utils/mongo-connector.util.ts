@@ -11,16 +11,24 @@ const password = process.env.MONGO_INITDB_ROOT_PASSWORD;
 const connectionString = `mongodb://${user}:${password}@${host}:${port}/${db}`;
 
 class MongoConnector {
+  private _connection: any;
+
   async connect (): Promise<void> {
     try {
-      await mongoose.connect(connectionString, {});
+      this._connection = await mongoose.connect(connectionString, {});
     } catch (error) {
       throw new CustomError(503, UNABLE_CONNECT_DB);
     }
   }
 
-  async closeConnection (): Promise<void> {
-    await mongoose.connection.close();
+  async closeConnection(): Promise<void> {
+    try {
+      await this._connection.close();
+      console.log('MongoDB connection closed');
+    } catch (error) {
+      console.error('Error closing MongoDB connection:', error);
+      throw new CustomError(500, 'Error closing MongoDB connection');
+    }
   }
 }
 export default new MongoConnector();

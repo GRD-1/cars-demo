@@ -1,18 +1,24 @@
 import connector from '../utils/mongo-connector.util';
+import { CarDto } from './dto/car.dto';
+import { CarDocument, CarModel } from './models/car.model';
 
 export class CarService {
-  async create(): Promise<string> {
-    return 'new CarEntity';
+  async create(dto: CarDto): Promise<CarDocument | null> {
+    const newCar = new CarModel(dto);
+    await connector.connect();
+    const carDocument = await newCar.save();
+    // await connector.closeConnection();
+    return carDocument;
   }
 
-  async getById(): Promise<string> {
+  async findOne(): Promise<string> {
     await connector.connect();
     // ... logic
     await connector.closeConnection();
     return 'old CarEntity';
   }
 
-  async getSelection(): Promise<string> {
+  async findSeveral(): Promise<string> {
     return 'selection of CarEntity';
   }
 

@@ -7,12 +7,12 @@ const authService = serviceProvider.getService(AuthService);
 export class AuthController {
   async register(req: AuthRequestInterface, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.authDto) {
-        console.log('AuthController req.authDto = ', req.authDto);
+      if (!req.dto) {
+        console.log('AuthController req.authDto = ', req.dto);
         res.status(500).json('RAVOLY!!!');
         return;
       }
-      const newUser = await authService.register(req.authDto);
+      const newUser = await authService.register(req.dto);
       res.status(200).json(newUser);
     } catch (e) {
       next(e);
@@ -21,7 +21,7 @@ export class AuthController {
 
   async login(req: AuthRequestInterface, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (req.authDto) {
+      if (req.dto) {
         const user = await authService.login();
         res.send(user);
       }

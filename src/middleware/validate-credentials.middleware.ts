@@ -5,7 +5,7 @@ import { AuthDto } from '../auth/dto/auth.dto';
 import { AuthRequestInterface } from '../auth/types/auth-request.type';
 import { UNPROCESSABLE_ENTITY } from '../constants/err.constant';
 
-export class CheckCredentialsMiddleware {
+export class ValidateCredentialsMiddleware {
   async credentialsAreValid(req: AuthRequestInterface, res: Response, next: NextFunction): Promise<void> {
     const authDto = new AuthDto();
     Object.assign(authDto, req.body);
@@ -15,7 +15,7 @@ export class CheckCredentialsMiddleware {
       next(customErr);
       return;
     }
-    req.authDto = authDto;
+    req.dto = authDto;
     next();
   }
 }
