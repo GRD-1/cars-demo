@@ -1,7 +1,8 @@
-import * as mongoose from 'mongoose';
+import { Schema, Document, Connection, createConnection } from 'mongoose';
 import * as process from 'process';
 import { CustomError } from '../errors/custom-error.type';
 import { UNABLE_CONNECT_DB } from '../constants/err.constant';
+import { ModelDataType } from '../car/types/model-data.type';
 
 const host = process.env.MONGO_HOSTNAME;
 const port = process.env.MONGO_PORT_INTERNAL;
@@ -11,23 +12,13 @@ const password = process.env.MONGO_INITDB_ROOT_PASSWORD;
 const connectionString = `mongodb://${user}:${password}@${host}:${port}/${db}`;
 
 class MongoConnector {
-  private _connection: any;
-
-  async connect (): Promise<void> {
+  async getConnection<T extends Schema, D extends Document>(modelData: ModelDataType<T>[]): Promise<Connection> {
     try {
-      this._connection = await mongoose.connect(connectionString, {});
+      const connection = await createConnection(connectionString, {});
+      modelData.forEach((item => connection.model<D>(item.name, item.schema)));
+      return connection;
     } catch (error) {
       throw new CustomError(503, UNABLE_CONNECT_DB);
-    }
-  }
-
-  async closeConnection(): Promise<void> {
-    try {
-      await this._connection.close();
-      console.log('MongoDB connection closed');
-    } catch (error) {
-      console.error('Error closing MongoDB connection:', error);
-      throw new CustomError(500, 'Error closing MongoDB connection');
     }
   }
 }

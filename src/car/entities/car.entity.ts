@@ -9,5 +9,3 @@ export const CarSchema = new mongoose.Schema<CarDocument>({
   year: Number,
   cost: Number,
 });
-
-export const CarModel = mongoose.model<CarDocument>('Cars', CarSchema);
