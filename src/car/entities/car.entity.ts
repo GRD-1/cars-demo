@@ -9,3 +9,5 @@ export const CarSchema = new mongoose.Schema<CarDocument>({
   year: Number,
   cost: Number,
 });
+
+export const carModelData = { name: 'Cars', schema: CarSchema };

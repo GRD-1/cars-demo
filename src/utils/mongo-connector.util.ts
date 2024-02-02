@@ -1,6 +1,6 @@
 import { Schema, Document, Connection, createConnection } from 'mongoose';
 import * as process from 'process';
-import { CustomError } from '../errors/custom-error.type';
+import { CustomError } from '../types/custom-error.type';
 import { UNABLE_CONNECT_DB } from '../constants/err.constant';
 import { ModelDataType } from '../car/types/model-data.type';
 

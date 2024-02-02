@@ -14,9 +14,10 @@ export class CarController {
     }
   }
 
-  async findOne(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async findById(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const car = await carService.findOne();
+      console.log('controller req.params', req.params);
+      const car = await carService.findById(req.params.id);
       res.send(car);
     } catch (e) {
       next(e);
