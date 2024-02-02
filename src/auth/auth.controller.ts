@@ -8,7 +8,6 @@ export class AuthController {
   async register(req: AuthRequestInterface, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.dto) {
-        console.log('AuthController req.authDto = ', req.dto);
         res.status(500).json('RAVOLY!!!');
         return;
       }

@@ -5,7 +5,8 @@ import { AuthDto } from '../auth/dto/auth.dto';
 import { AuthRequestInterface } from '../auth/types/auth-request.type';
 import { UNPROCESSABLE_ENTITY } from '../constants/err.constant';
 
-export const validateCredentials = async (req: AuthRequestInterface, res: Response, next: NextFunction): Promise<void> => {
+export default async (req: AuthRequestInterface, res: Response, next: NextFunction): Promise<void> => {
+  console.log('\nvalidateCredentials', req.body);
   const authDto = new AuthDto();
   Object.assign(authDto, req.body);
   const errors = await validate(authDto);

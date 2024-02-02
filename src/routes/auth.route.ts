@@ -1,6 +1,6 @@
 import express from 'express';
 import { AuthController } from '../auth/auth.controller';
-import { validateCredentials } from '../middleware/validate-credentials.middleware';
+import validateCredentials from '../middleware/validate-credentials.middleware';
 import { AuthRequestInterface } from '../auth/types/auth-request.type';
 import { NOT_FOUND } from '../constants/err.constant';
 

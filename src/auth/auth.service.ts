@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   async login(): Promise<string> {
-    return 'register ok';
+    return 'login ok';
   }
 
   // async findOne(dto: AuthDto): Promise<UserDocument | null> {
