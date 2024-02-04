@@ -1,14 +1,16 @@
 // client
-export const BAD_REQUEST = 'BAD REQUEST';
-export const NOT_FOUND = 'RESOURCE NOT FOUND';
-export const UNAUTHORIZED = 'UNAUTHORIZED';
-export const UNPROCESSABLE_ENTITY = 'UNPROCESSABLE ENTITY';
-export const INVALID_ID = 'INVALID ID TYPE. The id must be of type "number" OR "string" (length = 12 || 24)';
+export const BAD_REQUEST = '#400. BAD REQUEST';
+export const NOT_FOUND = '#404. RESOURCE NOT FOUND';
+export const UNAUTHORIZED = '#401. UNAUTHORIZED';
+export const UNPROCESSABLE_ENTITY = '#422. UNPROCESSABLE ENTITY';
+export const INVALID_ID = '#422. INVALID ID TYPE. The id must be of type "string" with length = 12 || 24';
+export const INVALID_QUERY_PARAM = '#422. INVALID QUERY PARAMETERS';
+export const INVALID_QUERY_TYPE = '#422. INVALID QUERY TYPE';
 
 // server
-export const INTERNAL_SERVER_ERROR = 'INTERNAL SERVER ERROR';
+export const INTERNAL_SERVER_ERROR = '#500. INTERNAL SERVER ERROR';
 
 // database
-export const UNABLE_CONNECT_DB = 'UNABLE TO CONNECT TO THE DATABASE';
-export const UNKNOWN_DB_ERROR = 'UNKNOWN DB ERROR';
-export const DUPLICATE_KEY_ERROR = 'DUPLICATE KEY ERROR';
+export const UNABLE_CONNECT_DB = '#503. UNABLE TO CONNECT TO THE DATABASE';
+export const UNKNOWN_DB_ERROR = '#500. UNKNOWN DB ERROR';
+export const DUPLICATE_KEY_ERROR = '#409. DUPLICATE KEY ERROR';

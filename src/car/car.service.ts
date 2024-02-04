@@ -1,6 +1,7 @@
 import connector from '../utils/mongo-connector.util';
 import { CarDto } from './dto/car.dto';
 import { CarDocument, carModelData } from './entities/car.entity';
+import { CarSelectionDto } from './dto/car-selection.dto';
 
 export class CarService {
   async create(dto: CarDto): Promise<CarDocument | null> {
@@ -17,14 +18,8 @@ export class CarService {
     return car;
   }
 
-  async findOne(): Promise<CarDocument | null> {
-    const connection = await connector.getConnection([carModelData]);
-    const car = await connection.model('Cars').findOne({ name: 'model9', year: 2022 }).exec();
-    await connection.close();
-    return car;
-  }
-
-  async findSeveral(): Promise<string> {
+  async findSeveral(dto: CarSelectionDto): Promise<string> {
+    console.log('\ncarService findSeveral dto', dto);
     return 'selection of CarEntity';
   }
 

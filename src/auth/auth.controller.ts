@@ -1,11 +1,11 @@
 import { NextFunction, Response } from 'express';
 import serviceProvider from '../utils/service-provider.util';
 import { AuthService } from './auth.service';
-import { AuthRequestInterface } from './types/auth-request.type';
+import { AuthRequestType } from './types/auth-request.type';
 const authService = serviceProvider.getService(AuthService);
 
 export class AuthController {
-  async register(req: AuthRequestInterface, res: Response, next: NextFunction): Promise<void> {
+  async register(req: AuthRequestType, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.dto) {
         res.status(500).json('RAVOLY!!!');
@@ -18,7 +18,7 @@ export class AuthController {
     }
   }
 
-  async login(req: AuthRequestInterface, res: Response, next: NextFunction): Promise<void> {
+  async login(req: AuthRequestType, res: Response, next: NextFunction): Promise<void> {
     try {
       if (req.dto) {
         const user = await authService.login();
