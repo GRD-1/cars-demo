@@ -18,9 +18,11 @@ export class CarService {
     return car;
   }
 
-  async findSeveral(dto: CarSelectionDto): Promise<string> {
-    console.log('\ncarService findSeveral dto', dto);
-    return 'selection of CarEntity';
+  async findSeveral(dto: CarSelectionDto): Promise<CarDocument[]> {
+    const connection = await connector.getConnection([carModelData]);
+    const cars = await connection.model('Cars').find(dto).exec();
+    await connection.close();
+    return cars;
   }
 
   async update(): Promise<string> {

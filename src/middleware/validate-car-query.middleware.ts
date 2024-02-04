@@ -8,7 +8,6 @@ import { SelectCarDefaultType } from '../car/types/select-car-default.type';
 
 class ValidateCarQuery {
   static async validate(req: SelectCarRequestType, res: Response, next: NextFunction): Promise<void> {
-    console.log('\nValidateCarQuery validate');
     const carSelectionDto = new CarSelectionDto();
     const keyErrors = ValidateCarQuery.getKeyErrors(req.query);
     if (keyErrors.length > 0) {
@@ -23,7 +22,7 @@ class ValidateCarQuery {
       next(customErr);
       return;
     }
-    req.dto = carSelectionDto;
+    req.dto = Object.assign(carSelectionDto, req.query);
     next();
   }
 
