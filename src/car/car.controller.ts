@@ -8,7 +8,7 @@ export class CarController {
   async create(req: AuthRequestInterface, res: Response, next: NextFunction): Promise<void> {
     try {
       const newCar = await carService.create(req.dto);
-      res.send(newCar);
+      res.status(201).send(newCar);
     } catch (e) {
       next(e);
     }
@@ -18,7 +18,7 @@ export class CarController {
     try {
       console.log('controller req.params', req.params);
       const car = await carService.findById(req.params.id);
-      res.send(car);
+      res.status(200).send(car);
     } catch (e) {
       next(e);
     }
@@ -27,7 +27,7 @@ export class CarController {
   async findSeveral(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const carSelection = await carService.findSeveral();
-      res.send(carSelection);
+      res.status(200).send(carSelection);
     } catch (e) {
       next(e);
     }
@@ -36,7 +36,7 @@ export class CarController {
   async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const updatedCar = await carService.update();
-      res.send(updatedCar);
+      res.status(200).send(updatedCar);
     } catch (e) {
       next(e);
     }
@@ -45,7 +45,7 @@ export class CarController {
   async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const carDeleted = await carService.delete();
-      res.send(carDeleted);
+      res.status(200).send(carDeleted);
     } catch (e) {
       next(e);
     }
