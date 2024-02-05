@@ -1,5 +1,6 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
-import { Transform } from 'class-transformer';
+import { Type } from 'class-transformer';
+import 'reflect-metadata';
 
 export class CarSelectionDto {
   @IsOptional()
@@ -12,11 +13,11 @@ export class CarSelectionDto {
 
   @IsOptional()
   @IsNumber()
-  @Transform((value: any) => parseInt(value, 10))
+  @Type(() => Number)
   year: number;
 
   @IsOptional()
   @IsNumber()
-  @Transform((value: any) => parseFloat(value))
+  @Type(() => Number)
   cost: number;
 }
