@@ -1,7 +1,9 @@
+import { CustomError } from '../types/custom-error.type';
 import connector from '../utils/mongo-connector.util';
 import { CarDto } from './dto/car.dto';
 import { CarDocument, carModelData } from './entities/car.entity';
 import { CarSelectionDto } from './dto/car-selection.dto';
+import { RECORD_NOT_FOUND } from '../constants/err.constant';
 
 export class CarService {
   async create(dto: CarDto): Promise<CarDocument | null> {
@@ -25,11 +27,19 @@ export class CarService {
     return cars;
   }
 
-  async update(): Promise<string> {
-    return 'updated CarEntity';
+  async update(id: string, dto: CarDto): Promise<number> {
+    const connection = await connector.getConnection([carModelData]);
+    const res = await connection.model('Cars').updateOne({ _id: id }, dto);
+    await connection.close();
+    if (res.modifiedCount < 1) throw new CustomError(404, RECORD_NOT_FOUND);
+    return res.modifiedCount;
   }
 
-  async delete(): Promise<string> {
-    return 'CarEntity has been deleted';
+  async delete(id: string): Promise<number> {
+    const connection = await connector.getConnection([carModelData]);
+    const res = await connection.model('Cars').deleteOne({ _id: id });
+    await connection.close();
+    if (res.deletedCount < 1) throw new CustomError(404, RECORD_NOT_FOUND);
+    return res.deletedCount;
   }
 }

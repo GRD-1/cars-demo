@@ -35,7 +35,7 @@ router.get('/:id', validateToken, validateId, (req, res, next) => {
 /**
  * @api {put} api/cars/:id
  */
-router.put('/:id', validateToken, validateId, validateCarData, (req, res, next) => {
+router.put('/:id', validateToken, validateId, validateCarData, (req: CreateCarRequestType, res, next) => {
   controller.update(req, res, next);
 });
 

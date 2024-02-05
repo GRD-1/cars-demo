@@ -33,10 +33,10 @@ export class CarController {
     }
   }
 
-  async update(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async update(req: CreateCarRequestType, res: Response, next: NextFunction): Promise<void> {
     try {
-      const updatedCar = await carService.update();
-      res.status(200).send(updatedCar);
+      await carService.update(req.params.id, req.dto);
+      res.status(200).send('OK');
     } catch (e) {
       next(e);
     }
@@ -44,8 +44,8 @@ export class CarController {
 
   async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const carDeleted = await carService.delete();
-      res.status(200).send(carDeleted);
+      await carService.delete(req.params.id);
+      res.status(200).send('OK');
     } catch (e) {
       next(e);
     }
