@@ -3,9 +3,9 @@ import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
 import { CustomError } from '../types/custom-error.type';
 import { INVALID_QUERY_PARAM, INVALID_QUERY_TYPE } from '../constants/err.constant';
-import { CarSelectionDto } from '../car/dto/car-selection.dto';
-import { SelectCarRequestType } from '../car/types/select-car-request.type';
-import { queryKeys, queryType } from '../car/types/request-query.type';
+import { CarSelectionDto } from '../modules/car/dto/car-selection.dto';
+import { SelectCarRequestType } from '../modules/car/types/select-car-request.type';
+import { queryKeys, queryType } from '../modules/car/types/request-query.type';
 
 class CarQueryValidator {
   static async validateQuery(req: SelectCarRequestType, res: Response, next: NextFunction): Promise<void> {

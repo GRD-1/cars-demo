@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import serviceProvider from '../utils/service-provider.util';
+import serviceProvider from '../../utils/service-provider.util';
 import { CarService } from './car.service';
 import { CreateCarRequestType } from './types/create-car-request.type';
 import { SelectCarRequestType } from './types/select-car-request.type';

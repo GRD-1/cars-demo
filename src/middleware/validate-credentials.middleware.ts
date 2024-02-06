@@ -1,13 +1,12 @@
 import { Response, NextFunction } from 'express';
 import { validate } from 'class-validator';
 import { CustomError } from '../types/custom-error.type';
-import { AuthDto } from '../auth/dto/auth.dto';
-import { AuthRequestType } from '../auth/types/auth-request.type';
+import { UserDto } from '../modules/user/dto/user.dto';
+import { AuthRequestType } from '../modules/user/types/auth-request.type';
 import { UNPROCESSABLE_ENTITY } from '../constants/err.constant';
 
 export default async (req: AuthRequestType, res: Response, next: NextFunction): Promise<void> => {
-  console.log('\nvalidateCredentials', req.body);
-  const authDto = new AuthDto();
+  const authDto = new UserDto();
   Object.assign(authDto, req.body);
   const errors = await validate(authDto);
   if (errors.length > 0) {

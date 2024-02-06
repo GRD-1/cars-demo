@@ -2,8 +2,8 @@ import { Response, NextFunction } from 'express';
 import { validate } from 'class-validator';
 import { CustomError } from '../types/custom-error.type';
 import { UNPROCESSABLE_ENTITY } from '../constants/err.constant';
-import { CarDto } from '../car/dto/car.dto';
-import { CreateCarRequestType } from '../car/types/create-car-request.type';
+import { CarDto } from '../modules/car/dto/car.dto';
+import { CreateCarRequestType } from '../modules/car/types/create-car-request.type';
 
 export const validateCarData = async (req: CreateCarRequestType, res: Response, next: NextFunction): Promise<void> => {
   const carDto = new CarDto();

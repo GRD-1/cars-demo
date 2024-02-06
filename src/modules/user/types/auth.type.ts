@@ -2,7 +2,7 @@
 //
 // export type UserType = { id: number, login: string }
 
-export type UserType = {
+export type AuthType = {
   id: number;
 
   login: string;

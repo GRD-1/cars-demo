@@ -1,16 +1,17 @@
 import express from 'express';
-import { AuthController } from '../auth/auth.controller';
+import { UserController } from '../modules/user/user.controller';
 import validateCredentials from '../middleware/validate-credentials.middleware';
-import { AuthRequestType } from '../auth/types/auth-request.type';
+import { AuthRequestType } from '../modules/user/types/auth-request.type';
 import { NOT_FOUND } from '../constants/err.constant';
 
 const router = express.Router();
-const controller = new AuthController();
+const controller = new UserController();
+router.use(validateCredentials);
 
 /**
- * @api {post} api/auth/register
+ * @api {post} api/user/register
  */
-router.post('/register', validateCredentials, (req: AuthRequestType, res, next) => {
+router.post('/register', (req: AuthRequestType, res, next) => {
   try {
     controller.register(req, res, next);
   } catch (err) {
@@ -19,9 +20,9 @@ router.post('/register', validateCredentials, (req: AuthRequestType, res, next) 
 });
 
 /**
- * @api {post} api/auth/login
+ * @api {post} api/user/login
  */
-router.post('/login', validateCredentials, (req: AuthRequestType, res, next) => {
+router.post('/login', (req: AuthRequestType, res, next) => {
   try {
     controller.login(req, res, next);
   } catch (err) {

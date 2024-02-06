@@ -1,6 +1,6 @@
 import { Request } from 'express';
-import { AuthDto } from '../dto/auth.dto';
+import { UserDto } from '../dto/user.dto';
 
 export interface AuthRequestType extends Request {
-  dto: AuthDto | null
+  dto: UserDto
 }
