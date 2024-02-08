@@ -1,10 +1,10 @@
 import { CustomError } from '../../types/custom-error.type';
-import MongoConnector from '../../utils/mongo-connector.util';
+import MongoConnector from '../../services/mongo-connector.service';
 import { CarDto } from './dto/car.dto';
 import { CarDocument, carModelData } from './entities/car.entity';
 import { CarSelectionDto } from './dto/car-selection.dto';
 import { RECORD_NOT_FOUND } from '../../constants/err.constant';
-import serviceProvider from '../../utils/service-provider.util';
+import serviceProvider from '../../services/service-provider.service';
 
 export class CarService {
   private db: MongoConnector;

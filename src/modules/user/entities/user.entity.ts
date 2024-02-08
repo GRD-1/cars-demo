@@ -1,11 +1,13 @@
-import mongoose from 'mongoose';
-import { UserDto } from '../dto/user.dto';
+import { Schema, Document } from 'mongoose';
 
-export interface UserDocument extends Document, UserDto {}
-
-export const UserSchema = new mongoose.Schema({
+export const UserSchema = new Schema({
   login: { type: String, required: true, unique: true },
   passwordHash: String,
 });
+
+export interface UserDocument extends Document {
+  login: string;
+  passwordHash: string;
+}
 
 export const userModelData = { name: 'Users', schema: UserSchema };

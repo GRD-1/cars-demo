@@ -2,12 +2,14 @@
 export const BAD_REQUEST = '#400. BAD REQUEST';
 export const NOT_FOUND = '#404. RESOURCE NOT FOUND';
 export const UNAUTHORIZED = '#401. UNAUTHORIZED';
+export const INVALID_CREDENTIALS = '#401. INVALID CREDENTIALS';
 export const UNPROCESSABLE_ENTITY = '#422. UNPROCESSABLE ENTITY';
 export const INVALID_ID = '#422. INVALID ID TYPE. The id must be of type "string" with length = 12 || 24';
 export const INVALID_QUERY_PARAM = '#422. INVALID QUERY PARAMETERS';
 export const INVALID_QUERY_TYPE = '#422. INVALID QUERY TYPE';
 
 // server
+export const ENV_VARIABLE_UNAVAILABLE = '#500. FAILED TO LOAD ENV VARIABLE';
 export const INTERNAL_SERVER_ERROR = '#500. INTERNAL SERVER ERROR';
 
 // database

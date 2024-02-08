@@ -1,21 +1,21 @@
-// import { Request, Response, NextFunction } from 'express';
-//
-// export const authenticate = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-//   try {
-//     const user = auth.authenticate((err, user, info) => {
-//       if (err) { return next(err); }
-//       if (!user) {
-//         if (info.name === 'TokenExpiredError') {
-//           return res.status(401).json({ message: 'Your token has expired. Please generate a new one' });
-//         }
-//         return res.status(401).json({ message: info.message });
-//       }
-//       app.set('user', user);
-//       return next();
-//     })(req, res, next);
-//     next();
-//     return;
-//   } catch (e) {
-//     next(e);
-//   }
-// };
+import passport from 'passport';
+import { NextFunction, Request, Response } from 'express';
+import { CustomError } from '../types/custom-error.type';
+import { UNAUTHORIZED } from '../constants/err.constant';
+
+export const authenticate = (req: Request, res: Response, next: NextFunction): void => {
+  console.log('\nauthenticate middleware');
+  passport.authenticate('jwt', { session: false }, (err, user) => {
+    console.log('passport.authenticate');
+    if (err || !user) {
+      console.log('passport.authenticate err');
+      const customErr = new CustomError(401, `${UNAUTHORIZED}`);
+      next(customErr);
+      return;
+    }
+    console.log('passport.authenticate success');
+    req.user = user;
+  })(req, res, next);
+  console.log('passport.authenticate quit');
+  next();
+};
