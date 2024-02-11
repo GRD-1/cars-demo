@@ -6,10 +6,7 @@ import { handleErrors } from './middleware/handle-errors.middleware';
 import { BAD_REQUEST } from './constants/err.constant';
 import 'reflect-metadata';
 import { validateEnvVariables } from './env/env-validator';
-import serviceProvider from './services/service-provider.service';
-import { PassportService } from './services/passport.service';
 
-serviceProvider.getService(PassportService);
 validateEnvVariables(process.env);
 
 export const app = express();

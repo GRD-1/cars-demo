@@ -1,39 +1,40 @@
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { ExtractJwt, Strategy, VerifiedCallback } from 'passport-jwt';
 import * as process from 'process';
-import { model } from 'mongoose';
 import passport from 'passport';
 import serviceProvider from './service-provider.service';
 import { UserService } from '../modules/user/user.service';
-import { UserSchema } from '../modules/user/entities/user.entity';
+import { UserDocument } from '../modules/user/entities/user.entity';
 
-// const userService = serviceProvider.getService(UserService);
-// const opts = {
-//   secretOrKey: process.env.JWT_SECRET,
-//   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-// };
+const userService = serviceProvider.getService(UserService);
 
 export class PassportService {
+  private static _instance: PassportService;
+  public passport: any;
+
   constructor() {
-    console.log('\nnew PassportService created!');
-    passport.initialize();
+    this.passport = new passport.Passport();
+    this.passport.initialize();
     const strategy = this.getStrategy();
-    passport.use('jwt', strategy);
+    this.passport.use('jwt', strategy);
   }
 
   getStrategy(): Strategy {
     const opts = this.getOpts();
-    return new Strategy(opts, (jwtPayload, done) => {
-      console.log('\nnew Strategy in use!');
-      model('User', UserSchema).findOne({ id: jwtPayload.sub }, (err, user) => {
-        if (err) {
-          return done(err, false);
-        }
-        if (user) {
-          return done(null, user);
-        }
-        return done(null, false);
-      });
+    return new Strategy(opts, async (jwtPayload, done) => {
+      try {
+        const user = await userService.findById(jwtPayload._id);
+        this.strategyCallback(user as UserDocument, done);
+      } catch (e) {
+        done(e, false);
+      }
     });
+  }
+
+  strategyCallback(user: UserDocument, done: VerifiedCallback): void {
+    if (user) {
+      return done(null, user);
+    }
+    return done(null, false);
   }
 
   getOpts(): any {
@@ -43,4 +44,13 @@ export class PassportService {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     };
   }
+
+  static getInstance(): PassportService {
+    if (!PassportService._instance) {
+      PassportService._instance = new PassportService();
+    }
+    return PassportService._instance;
+  }
 }
+
+export default PassportService.getInstance();

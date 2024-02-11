@@ -1,14 +1,14 @@
 import { Schema, Document } from 'mongoose';
 
 export const UserSchema = new Schema({
-  login: { type: String, required: true, unique: true },
+  username: { type: String, required: true, unique: true },
   passwordHash: String,
   salt: String,
   refreshToken: String,
 });
 
 export interface UserDocument extends Document {
-  login: string;
+  username: string;
   passwordHash: string;
   salt: string,
   refreshToken: string,

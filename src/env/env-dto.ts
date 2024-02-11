@@ -19,11 +19,11 @@ export class EnvDto {
   @IsString()
     JWT_SECRET: string;
 
-  @IsNumber()
-  ACCESS_TOKEN_EXPIRES: number;
+  @IsString()
+  ACCESS_TOKEN_EXPIRES: string;
 
-  @IsNumber()
-  REFRESH_TOKEN_EXPIRES: number;
+  @IsString()
+  REFRESH_TOKEN_EXPIRES: string;
 
   /* Node ------------------------------------------------------ */
   @IsNumber()
