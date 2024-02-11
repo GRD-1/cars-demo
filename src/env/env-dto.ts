@@ -20,7 +20,10 @@ export class EnvDto {
     JWT_SECRET: string;
 
   @IsNumber()
-    TOKEN_EXPIRES: number;
+  ACCESS_TOKEN_EXPIRES: number;
+
+  @IsNumber()
+  REFRESH_TOKEN_EXPIRES: number;
 
   /* Node ------------------------------------------------------ */
   @IsNumber()

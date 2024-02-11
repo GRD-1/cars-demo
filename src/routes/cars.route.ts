@@ -5,11 +5,11 @@ import { validateId } from '../middleware/validate-id.middleware';
 import { NOT_FOUND } from '../constants/err.constant';
 import { CreateCarRequestType } from '../modules/car/types/create-car-request.type';
 import validateQuery from '../middleware/validate-car-query.middleware';
-import { authenticate } from '../middleware/authenticate.middleware';
+import { checkToken } from '../middleware/check-token.middleware';
 
 const controller = new CarController();
 const router = express.Router();
-router.use(authenticate);
+router.use(checkToken);
 
 /**
  * @api {post} api/cars

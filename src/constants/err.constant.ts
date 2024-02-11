@@ -1,8 +1,9 @@
 // client
 export const BAD_REQUEST = '#400. BAD REQUEST';
 export const NOT_FOUND = '#404. RESOURCE NOT FOUND';
-export const UNAUTHORIZED = '#401. UNAUTHORIZED';
 export const INVALID_CREDENTIALS = '#401. INVALID CREDENTIALS';
+export const INVALID_JWT = '#401. INVALID JWT';
+export const INVALID_REFRESH_JWT = '#401. INVALID REFRESH JWT';
 export const UNPROCESSABLE_ENTITY = '#422. UNPROCESSABLE ENTITY';
 export const INVALID_ID = '#422. INVALID ID TYPE. The id must be of type "string" with length = 12 || 24';
 export const INVALID_QUERY_PARAM = '#422. INVALID QUERY PARAMETERS';
