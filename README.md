@@ -8,7 +8,7 @@ It consists of two parts:
 <p style="display: block; width: 100%; text-align:left;">
   <a href="https://nodejs.org/en/about" target="_blank"><img src="https://img.shields.io/badge/Node.js-v18.16.0-blue?logo=nodedotjs" alt="Node.js Version" /></a>
   <a href="https://www.typescriptlang.org/" target="_blank"><img src="https://img.shields.io/badge/TypeScript-v4.7.4-blue?logo=typescript" alt="TypeScript Version" /></a>
-  <a href="" target="_blank"><img src="https://img.shields.io/badge/covarage-91.92%20-%2300c642?style=flat" alt="Coverage" /></a>
+  <a href="" target="_blank"><img src="https://img.shields.io/badge/covarage-91.92%25-%2300c642?style=flat" alt="Coverage" /></a>
   <a href="" rel="nofollow"><img src="https://img.shields.io/badge/istall_size-236%20KB-%23ebdb32?style=flat" alt="install size"></a>
 </p>
 
