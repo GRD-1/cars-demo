@@ -3,7 +3,6 @@ This is an application for storing and managing a car database.
 It consists of two parts:
 * a server that implements the REST API
 * a CLI client that allows you to make queries to this database
-* 
 
 <br>
 <p style="display: block; width: 100%; text-align:left;">
@@ -19,12 +18,7 @@ It consists of two parts:
 2. [Launch](#launch)
 3. [Usage](#usage)
 4. [Environment](#environment)
-5. [Settings](#settings)
-6. [Tests](#tests)
-7. [Database](#tests)
-8. [Logs](#tests)
-9. [CI/CD](#cicd)
-10. [Documentation](#documentation)
+5. [Tests](#tests)
 
 ## Stack
 
@@ -111,6 +105,3 @@ $ docker exec -it cars-demo-node-test npm run test:int
 # test coverage
 $ docker exec -it cars-demo-node-test npm run test:cov
 ```
-
-## Comments
-I intentionally left the environment variable files and the database backup copy in the project to simplify the testing. 
